@@ -2,7 +2,7 @@
 
 **Minecraft hash extractor for Minecraft Wiki** is a tool for obtaining the parameters of all versions available in the launcher for the [Infobox version template](https://minecraft.wiki/w/Template:Infobox_version) on the [Minecraft Wiki](https://minecraft.wiki/). **Requires a network connection at startup and after selecting a version.** Supports unique parameter names in different language sections.
 
-### Prerequisites:
+### Prerequisites
 
 This script requires you to have [**Python > 3.x.x**](https://www.python.org/downloads/) installed with the `requests` and `tkinter`library installed on your system.
 
@@ -33,7 +33,7 @@ Switching versions will not be very convenient if you need one of the earlier on
 
 **Minecraft hash extractor for Minecraft Wiki** — это инструмент для получения параметров любых версий, доступных в лаунчере, для использования в шаблоне [Карточка версии](https://ru.minecraft.wiki/w/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD:%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BA%D0%B0%20%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%B8) на [Minecraft Wiki](https://ru.minecraft.wiki/). **Требуется подключение к интернету при запуске и после выбора версии.** Поддерживает уникальные имена параметров для разных разных языковых разделов.
 
-### Требования:
+### Требования
 
 Для запуска необходимо установить [**Python > 3.x.x**](https://www.python.org/downloads/) с библиотеками `requests` и `tkinter`.
 
