@@ -1,7 +1,7 @@
 import requests, re
 import tkinter as tk
+from tkinter import ttk,messagebox
 from urllib.parse import urlparse, unquote
-from tkinter import messagebox
 
 # Getting links to JSON versions list
 try:
@@ -116,7 +116,7 @@ def updateWidget():
     formattedOut = ""
     if not jsonhashVarName == "" and not jsonhash == "":
         formattedOut += f"|{jsonhashVarName}={jsonhash}\n"
-    if not jsonfileVarName == "" and not jsonfile == "":
+    if not jsonfileVarName == "" and not jsonfile == "" and jsonfileVar.get():
         formattedOut += f"|{jsonfileVarName}={jsonfile}\n"
     if not clienthashVarName == "" and not clienthash == "":
         formattedOut += f"|{clienthashVarName}={clienthash}\n"
@@ -157,25 +157,38 @@ frame = tk.Frame(root, bg="lightgreen")
 frame.pack(fill="both")
 
 # --- SELECT LANGUAGE ---
+textLang = tk.Label(frame, text="Select language:", bg="lightgreen")
+textLang.grid(row=0, column=0, padx=5, pady=5,sticky="w")
 selectLang = tk.StringVar(value=languagesList[1])
 langMenu = tk.OptionMenu(frame, selectLang, *languagesList, command=langSelect)
-langMenu.config(width=15)
-langMenu.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
+langMenu.grid(row=0, column=1, pady=5,sticky="ew")
 
 # --- SELECT VERSION ---
+textVersion = tk.Label(frame, text="Select version:", bg="lightgreen")
+textVersion.grid(row=1, column=0, padx=5,sticky="w")
 versionVar = tk.StringVar(value=versionsList[0])
-versionMenu = tk.OptionMenu(frame, versionVar, *versionsList, command=updateVerManifest)
-versionMenu.config(width=15)
-versionMenu.grid(row=0, column=1, padx=5, pady=5, sticky="ew")
+versionMenu = ttk.Combobox(
+    frame,
+    values=versionsList,
+    state="readonly",
+    textvariable=versionVar
+    )
+versionMenu.grid(row=1, column=1,sticky="ew")
+versionMenu.current(0)
+versionMenu.bind("<<ComboboxSelected>>",updateVerManifest)
 
+# --- Disable jsonfile name checkbox ---
+jsonfileVar = tk.BooleanVar(value=True)
+jsonfileCheck = tk.Checkbutton(frame, text="Name json file", variable=jsonfileVar, command=updateWidget, bg="lightgreen")
+jsonfileCheck.grid(row=1, column=2, padx=5, pady=5)
 
 # --- TEXT OUTPUT ---
 widget = tk.Text(frame, width=widthTextBoard, height=6, wrap="word")
-widget.grid(row=1, column=0, padx=5, columnspan=2, sticky="ew")
+widget.grid(row=3, column=0, padx=5, columnspan=3)
 updateVerManifest("")
 
 # --- COPY BUTTON ---
 copyButton = tk.Button(frame, text="Copy to Clipboard", command=copy2Clipboard)
-copyButton.grid(row=2, column=0, padx=5, pady=5, columnspan=2, sticky="ew")
+copyButton.grid(row=4, column=0, padx=5, pady=5, columnspan=3, sticky="ew")
 
 root.mainloop()
